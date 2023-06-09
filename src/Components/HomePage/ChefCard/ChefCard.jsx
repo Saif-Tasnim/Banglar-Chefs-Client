@@ -1,4 +1,5 @@
 import React from 'react';
+import { FaGraduationCap,FaBowlRice,FaHeart } from "react-icons/fa6";
 
 const ChefCard = ({ chef }) => {
 
@@ -10,9 +11,9 @@ const ChefCard = ({ chef }) => {
             <figure><img src={chef_picture} alt="Shoes" className='h-52 w-72'/></figure>
             <div className="card-body">
                 <h2 className="text-center card-title">{chef_name} </h2>
-                <p> {bio} </p>
+              
                 <div className="card-actions justify-end">
-                    <button className="btn btn-primary">    View Details </button>
+                    <button className="btn btn-primary">    View Recipe </button>
                 </div>
             </div>
         </div>
