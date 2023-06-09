@@ -8,8 +8,7 @@ import Container from 'postcss/lib/container';
 const Main = () => {
     return (
         <div>
-            <Header>
-            </Header>
+           <Header></Header>
             <Outlet></Outlet>
             <Footer></Footer>
         </div>
