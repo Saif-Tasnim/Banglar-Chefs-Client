@@ -4,7 +4,7 @@ import Header from '../../Share/Header/Header';
 
 const Home = () => {
     return (
-        <div>
+        <div className='bg-base-300'>
            <Banner></Banner>
         </div>
     );
