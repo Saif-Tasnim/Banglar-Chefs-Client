@@ -5,7 +5,7 @@ import { FaGraduationCap, FaUtensils, FaHeart } from 'react-icons/fa';
 
 const ChefCard = ({ chef }) => {
 
-    const { chef_name, chef_picture, num_recipes, years_of_experience } = chef
+    const { chef_name, chef_picture, num_recipes, years_of_experience , like} = chef
 
     return (
 
@@ -20,7 +20,7 @@ const ChefCard = ({ chef }) => {
                     <p className='flex items-center gap-2 pt-3'> Recipe  <FaUtensils /> :  <span className='font-semibold'> {num_recipes}  </span> </p>
                     
                     <p className='flex items-center gap-2 pt-3'>
-                        Likes  <FaHeart /> : </p>
+                        Likes  <FaHeart /> : <span className='font-semibold'> {num_recipes}  </span> </p>
 
                 </div>
 
