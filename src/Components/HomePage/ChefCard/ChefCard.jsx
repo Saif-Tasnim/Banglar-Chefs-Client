@@ -1,11 +1,12 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { FaGraduationCap, FaUtensils, FaHeart } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 
 const ChefCard = ({ chef }) => {
 
-    const { chef_name, chef_picture, num_recipes, years_of_experience , like} = chef
+    const { chef_name, chef_picture, num_recipes, years_of_experience, like , id } = chef
 
     return (
 
@@ -16,16 +17,16 @@ const ChefCard = ({ chef }) => {
 
                 <div className='mt-3'>
                     <p className='flex items-center gap-2 pt-3'> Experience <FaGraduationCap /> : <span className='font-semibold'>{years_of_experience}  years</span>  </p>
-                    
+
                     <p className='flex items-center gap-2 pt-3'> Recipe  <FaUtensils /> :  <span className='font-semibold'> {num_recipes}  </span> </p>
-                    
+
                     <p className='flex items-center gap-2 pt-3'>
-                        Likes  <FaHeart /> : <span className='font-semibold'> {num_recipes}  </span> </p>
+                        Likes  <FaHeart /> : <span className='font-semibold'> {like}  </span> </p>
 
                 </div>
 
                 <div className="card-actions justify-end mt-6">
-                    <button className="btn btn-primary">    View Recipe </button>
+                    <Link to={`/chefsDetails/${id}`}> <button className="btn btn-primary">  View Recipe </button></Link>
                 </div>
             </div>
         </div>

@@ -11,6 +11,8 @@ import Home from './Components/HomePage/Home/Home.jsx';
 import LogIn from './Components/LogIn/LogIn/LogIn.jsx';
 import Blog from './Components/Blog/Blog.jsx';
 import Register from './Components/LogIn/Register/Register.jsx';
+import ChefLayout from './layout/ChefLayout.jsx';
+import ChefDetails from './Components/ChefDetails/ChefDetails.jsx';
 
 const router = createBrowserRouter([
   {
@@ -33,6 +35,16 @@ const router = createBrowserRouter([
       {
         path:"register",
         element: <Register></Register>
+      }
+    ]
+  },
+  {
+    path: 'chefsDetails',
+    element: <ChefLayout></ChefLayout>,
+    children: [
+      {
+        path: ':id',
+        element:<ChefDetails></ChefDetails>
       }
     ]
   }

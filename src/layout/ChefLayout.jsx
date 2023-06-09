@@ -1,9 +1,14 @@
 import React from 'react';
+import Header from '../Components/Share/Header/Header';
+import Footer from '../Components/Share/Footer/Footer';
+import { Outlet } from 'react-router-dom';
 
 const ChefLayout = () => {
     return (
         <div>
-            <h1>represents all chefs  layouts </h1>
+           <Header></Header>
+           <Outlet></Outlet>
+           <Footer></Footer>
         </div>
     );
 };
