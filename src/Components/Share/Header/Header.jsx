@@ -21,9 +21,9 @@ const Header = () => {
                         {
                             toggle &&
                             <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-                                <li> <Link to="/"> Home </Link> </li>
-                                <li> <Link to='/blog'> Blog </Link></li>
-                                <li> <Link to='/login'> LogIn </Link></li>
+                                <li> <Link to="/" activeClassName="active"> Home </Link> </li>
+                                <li> <Link to='/blog' activeClassName="active"> Blog </Link></li>
+                                <li> <Link to='/login' activeClassName="active"> LogIn </Link></li>
                             </ul>
                         }
 

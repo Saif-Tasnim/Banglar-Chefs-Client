@@ -29,7 +29,7 @@ const ChefDetails = () => {
             ></ChefBanner>
 
             <div className="mt-28 mb-20  w-3/4 mx-auto flex gap-3 items-center">
-                <hr className="border-red-900 w-96" />
+                <hr className="border-red-900 w-96 ml-10" />
                 <div style={{ width: "10px", height: "10px", borderRadius: "50%", backgroundColor: "black" }}></div>
                 <div style={{ width: "10px", height: "10px", borderRadius: "50%", backgroundColor: "black" }}></div>
                 <div style={{ width: "10px", height: "10px", borderRadius: "50%", backgroundColor: "black" }}></div>

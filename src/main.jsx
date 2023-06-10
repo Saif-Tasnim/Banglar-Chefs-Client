@@ -13,6 +13,7 @@ import Blog from './Components/Blog/Blog.jsx';
 import Register from './Components/LogIn/Register/Register.jsx';
 import ChefLayout from './layout/ChefLayout.jsx';
 import ChefDetails from './Components/ChefDetails/ChefDetails.jsx';
+import ErrorPage from './Components/ErrorPage/ErrorPage.jsx';
 
 const router = createBrowserRouter([
   {
@@ -22,21 +23,28 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
-        loader: () => fetch('http://localhost:5000/chefs')
+        loader: () => fetch('http://localhost:5000/chefs'),
+
+
       },
       {
         path: 'login',
-        element: <LogIn></LogIn>
+        element: <LogIn></LogIn>,
+
+
       },
       {
         path: 'blog',
-        element: <Blog></Blog>
+        element: <Blog></Blog>,
+
       },
       {
         path: "register",
-        element: <Register></Register>
+        element: <Register></Register>,
+
       }
-    ]
+    ],
+    errorElement: <ErrorPage />
   },
   {
     path: 'chefsDetails',
@@ -45,9 +53,12 @@ const router = createBrowserRouter([
       {
         path: ':id',
         element: <ChefDetails></ChefDetails>,
-        loader: ({ params }) => fetch(`http://localhost:5000/chefsDetails/${params.id}`)
+        loader: ({ params }) => fetch(`http://localhost:5000/chefsDetails/${params.id}`),
+
       }
-    ]
+
+    ],
+    errorElement: <ErrorPage />
   }
 ])
 
