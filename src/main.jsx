@@ -14,6 +14,7 @@ import Register from './Components/LogIn/Register/Register.jsx';
 import ChefLayout from './layout/ChefLayout.jsx';
 import ChefDetails from './Components/ChefDetails/ChefDetails.jsx';
 import ErrorPage from './Components/ErrorPage/ErrorPage.jsx';
+import AuthProvider from './providers/AuthProvider.jsx';
 
 const router = createBrowserRouter([
   {
@@ -30,7 +31,7 @@ const router = createBrowserRouter([
       {
         path: 'login',
         element: <LogIn></LogIn>,
-       },
+      },
       {
         path: 'blog',
         element: <Blog></Blog>,
@@ -62,6 +63,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RouterProvider router={router}> </RouterProvider>
+    <AuthProvider>
+      <RouterProvider router={router}> </RouterProvider>
+    </AuthProvider>
   </React.StrictMode>,
 )
