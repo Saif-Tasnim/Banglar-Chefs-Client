@@ -46,7 +46,7 @@ const Recipe = ({ r }) => {
         <div className="card-actions justify-between mt-9">
           <Rating
             style={{ maxWidth: 150 }}
-            value={3}
+            value={r.ratting}
             readOnly
           />
           <button
