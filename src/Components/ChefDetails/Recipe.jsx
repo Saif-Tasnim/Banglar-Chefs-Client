@@ -1,5 +1,7 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
+
+import { Rating } from '@smastrom/react-rating'
+import '@smastrom/react-rating/style.css'
 
 const Recipe = ({ r }) => {
 
@@ -22,13 +24,19 @@ const Recipe = ({ r }) => {
 
         <div className='text-justify'>
           {
-          r.cooking_method.map(cm => <span
+            r.cooking_method.map(cm => <span
               key={r.id} className='pr-1'> {cm} </span>)
           }
 
         </div>
 
-        <div className="card-actions justify-end">
+        <div className="card-actions justify-between mt-9">
+          <Rating
+            style={{ maxWidth: 180 }}
+            value={3}
+            readOnly
+          />
+
           <button className="btn btn-primary">Buy Now</button>
         </div>
       </div>
