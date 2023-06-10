@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { FaGithub, FaGoogle } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { AuthContext } from '../../../providers/AuthProvider';
 
 
 const Register = () => {
+    const {user , createUserEmail} = useContext(AuthContext);
 
     const handleRegister = (event) => {
         event.preventDefault();
@@ -30,18 +32,39 @@ const Register = () => {
               return;
         }
 
-        console.log(name , photo , email , password);
-       
-        toast.success("successfully created " , {
-           position:toast.POSITION.TOP_CENTER,
-           autoClose: 2000,
-           hideProgressBar: false,
-           closeOnClick: true,
-           pauseOnHover: false,
-           draggable: true,
-           progress: undefined
 
-        });
+
+        // console.log(name , photo , email , password);
+
+
+       createUserEmail(email , password)
+       .then (res => {
+        const loggedUser = res.user;
+        console.log(loggedUser);
+        toast.success("successfully created " , {
+            position:toast.POSITION.TOP_CENTER,
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined
+ 
+         });
+       })
+       .catch (error => {
+        toast.error(`${error.message}` , {
+            position:toast.POSITION.TOP_CENTER,
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined
+ 
+         });
+       })
+        
 
         form.reset();
     }

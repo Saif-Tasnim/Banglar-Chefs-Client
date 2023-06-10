@@ -1,8 +1,36 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../../providers/AuthProvider';
+import { ToastContainer, toast } from 'react-toastify';
 
 const Header = () => {
+    const { user, logOut } = useContext(AuthContext);
+    console.log(user);
+
     const [toggle, setToggle] = useState(false);
+
+    const handleLogOut = () => {
+        toast.success("Successfully logged out", {
+            position: toast.POSITION.TOP_CENTER,
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined
+        });
+
+        setTimeout(() => {
+            logOut()
+                .then(() => {
+                    history.push('/');
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        }, 1500);
+    }
+
 
     return (
         <div className='bg-base-300'>
@@ -21,9 +49,22 @@ const Header = () => {
                         {
                             toggle &&
                             <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-                                <li> <Link to="/" activeClassName="active"> Home </Link> </li>
-                                <li> <Link to='/blog' activeClassName="active"> Blog </Link></li>
-                                <li> <Link to='/login' activeClassName="active"> LogIn </Link></li>
+                                <li> <Link to="/" > Home </Link> </li>
+                                <li> <Link to='/blog' > Blog </Link></li>
+
+                                <li>
+                                    {user ? <>
+                                        <Link to="/" onClick={handleLogOut}>
+                                            LogOut {user.email}
+                                        </Link>
+                                        <ToastContainer />
+                                    </> : (
+                                        <Link to="/login" >
+                                            LogIn
+                                        </Link>
+                                    )}
+                                </li>
+
                             </ul>
                         }
 
@@ -37,12 +78,24 @@ const Header = () => {
                     <ul className="menu menu-horizontal px-1">
                         <li> <Link to="/"> Home </Link> </li>
                         <li> <Link to='/blog'> Blog </Link></li>
-                        <li> <Link to='/login'> LogIn </Link></li>
+                        <li>
+                            {user ? <>
+                                <Link to="/" onClick={handleLogOut}>
+                                    LogOut {user.email}
+                                </Link>
+                                <ToastContainer />
+                            </> : (
+                                <Link to="/login" >
+                                    LogIn
+                                </Link>
+                            )}
+                        </li>
                     </ul>
                 </div>
 
             </div>
         </div>
+
     );
 };
 

@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { FaGithub, FaGoogle } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
+import { AuthContext } from '../../../providers/AuthProvider';
+
 
 const LogIn = () => {
+
+    const { signInEmail } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     const handleLogin = (event) => {
         event.preventDefault();
@@ -12,23 +17,44 @@ const LogIn = () => {
         const email = form.email.value;
         const password = form.password.value;
 
-        if(password.length < 6){
-          
-              return;
+        if (password.length < 6) {
+
+            return;
         }
 
-        console.log(email , password);
-       
-        toast.success("successfully logged in " , {
-           position:toast.POSITION.TOP_CENTER,
-           autoClose: 2000,
-           hideProgressBar: false,
-           closeOnClick: true,
-           pauseOnHover: false,
-           draggable: true,
-           progress: undefined
+        console.log(email, password);
 
-        });
+        signInEmail(email, password)
+            .then(() => {
+                toast.success("Successfully logged in", {
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 1500,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: false,
+                    draggable: true,
+                    progress: undefined
+                });
+
+                setTimeout(() => {
+                    navigate('/');
+                }, 1500);
+            })
+
+            .catch(error => {
+                toast.error(`${error.message}`, {
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: false,
+                    draggable: true,
+                    progress: undefined
+
+                });
+
+            })
+
 
         form.reset();
     }
@@ -53,7 +79,7 @@ const LogIn = () => {
                                 <label className="label pb-2">
                                     <span className="label-text font-bold text-xl">Password</span>
                                 </label>
-                                <input type="password" placeholder="enter your password" className="input input-bordered" required />
+                                <input type="password" placeholder="enter your password" className="input input-bordered" name="password" required />
                                 <label className="label">
                                     <span className='pt-4'>New to Banglar Chefs ?
                                         <Link to="/register" className="label-text-alt link link-hover text-base pl-2">Sign Up</Link> </span>
@@ -73,7 +99,7 @@ const LogIn = () => {
                             </div>
 
                         </form>
-                        <ToastContainer/>
+                        <ToastContainer />
                     </div>
                 </div>
 
