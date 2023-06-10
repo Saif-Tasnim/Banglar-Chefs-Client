@@ -37,7 +37,7 @@ const ChefDetails = () => {
             </div>
 
             <div className='w-3/4 mx-auto mb-28'>
-                <h1 className='text-center text-2xl font-bold mb-11'>Chefs Recipe List </h1>
+                <h1 className='text-center text-2xl font-bold mb-11'> Chefs Recipe List </h1>
 
                 {
                     recipes.map(r => <Recipe
