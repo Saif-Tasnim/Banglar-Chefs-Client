@@ -3,16 +3,17 @@ import { useLoaderData } from 'react-router-dom';
 import ChefBanner from './ChefBanner';
 import Recipe from './Recipe';
 
+
 const ChefDetails = () => {
     const singleData = useLoaderData();
-    const { id, chef_picture, chef_name, years_of_experience, like, num_recipes,bio } = singleData;
+    const { id, chef_picture, chef_name, years_of_experience, like, num_recipes, bio } = singleData;
 
-    const [recipes , setRecipe] = useState([]);
-    useEffect( () => {
+    const [recipes, setRecipe] = useState([]);
+    useEffect(() => {
         fetch('http://localhost:5000/recipe')
-        .then(res => res.json())
-        .then(data => setRecipe(data.recipes) )
-    },[])
+            .then(res => res.json())
+            .then(data => setRecipe(data.recipes))
+    }, [])
 
 
     return (
@@ -28,7 +29,7 @@ const ChefDetails = () => {
 
             ></ChefBanner>
 
-            <div className="mt-28 mb-20  w-3/4 mx-auto flex gap-3 items-center">
+       <div className="mt-28 mb-20  w-3/4 mx-auto flex gap-3 items-center">
                 <hr className="border-red-900 w-96 ml-10" />
                 <div style={{ width: "10px", height: "10px", borderRadius: "50%", backgroundColor: "black" }}></div>
                 <div style={{ width: "10px", height: "10px", borderRadius: "50%", backgroundColor: "black" }}></div>
@@ -41,12 +42,12 @@ const ChefDetails = () => {
 
                 {
                     recipes.map(r => <Recipe
-                    key={r.recipe_id}
-                    r = {r}
+                        key={r.recipe_id}
+                        r={r}
                     ></Recipe>)
                 }
             </div>
-            
+
             <div>
                 <hr />
             </div>
