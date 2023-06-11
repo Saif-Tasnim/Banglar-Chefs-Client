@@ -7,7 +7,7 @@ import { AuthContext } from '../../../providers/AuthProvider';
 
 const LogIn = () => {
 
-    const { signInEmail } = useContext(AuthContext);
+    const { signInEmail , signWithGoogle } = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -63,6 +63,49 @@ const LogIn = () => {
         form.reset();
     }
 
+ 
+    const handleGmail = () => {
+        signWithGoogle()
+            .then(res => {
+                const loggedUser = res.user;
+
+                // updateProfile(loggedUser, {
+                //     displayName: userName,
+                //     photoURL: userPhoto
+                // })
+                console.log(loggedUser);
+
+                toast.success("successfully created ", {
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: false,
+                    draggable: true,
+                    progress: undefined
+
+                });
+
+                setTimeout(() => {
+                    navigate('/');
+                }, 1500);
+
+            })
+            .catch(error => {
+                toast.error(`${error.message}`, {
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: false,
+                    draggable: true,
+                    progress: undefined
+
+                });
+            })
+
+    }
+
 
     return (
         <div className='mt-20'>
@@ -96,7 +139,8 @@ const LogIn = () => {
                             <hr className='border-blue-800 mt-5' />
                             <h5>Or</h5>
                             <div className="form-control mt-4">
-                                <button className="btn btn-primary"><FaGoogle></FaGoogle>  Continue with Google</button>
+                                <button className="btn btn-primary" 
+                                onClick={handleGmail}> <FaGoogle></FaGoogle>  Continue with Google</button>
                             </div>
                             <div className="form-control mt-1">
                                 <button className="btn btn-primary"><FaGithub />  Continue with GitHub </button>
