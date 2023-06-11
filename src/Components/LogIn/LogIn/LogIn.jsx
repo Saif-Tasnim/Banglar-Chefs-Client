@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { FaGithub, FaGoogle } from 'react-icons/fa';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import { AuthContext } from '../../../providers/AuthProvider';
 
@@ -9,6 +9,10 @@ const LogIn = () => {
 
     const { signInEmail } = useContext(AuthContext);
     const navigate = useNavigate();
+    const location = useLocation();
+
+    const from = location.state?.from?.pathname || "/";
+    console.log(from);
 
     const handleLogin = (event) => {
         event.preventDefault();
@@ -37,7 +41,7 @@ const LogIn = () => {
                 });
 
                 setTimeout(() => {
-                    navigate('/');
+                    navigate(from , {replace: true});
                 }, 1500);
             })
 

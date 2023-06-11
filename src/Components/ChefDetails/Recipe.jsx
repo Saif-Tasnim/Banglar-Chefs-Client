@@ -16,7 +16,9 @@ const Recipe = ({ r }) => {
 
   const handleOnClick = () => {
     setLike(true);
-    toast.success(`You have Liked The ${r.recipe_name} `);
+    toast.success(`You have Liked The ${r.recipe_name} `,{
+      position: toast.POSITION.TOP_CENTER,
+    });
 
   }
 
@@ -56,7 +58,7 @@ const Recipe = ({ r }) => {
             >
             <FaHeart />
           </button>
-          <ToastContainer position="top-center"  />
+          <ToastContainer  />
 
         </div>
       </div>

@@ -15,6 +15,7 @@ import ChefLayout from './layout/ChefLayout.jsx';
 import ChefDetails from './Components/ChefDetails/ChefDetails.jsx';
 import ErrorPage from './Components/ErrorPage/ErrorPage.jsx';
 import AuthProvider from './providers/AuthProvider.jsx';
+import PrivateRoute from './privateRoutes/PrivateRoute.jsx';
 
 const router = createBrowserRouter([
   {
@@ -51,7 +52,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: ':id',
-        element: <ChefDetails></ChefDetails>,
+        element: <PrivateRoute><ChefDetails></ChefDetails></PrivateRoute>,
         loader: ({ params }) => fetch(`http://localhost:5000/chefsDetails/${params.id}`),
 
       }
