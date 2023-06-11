@@ -1,13 +1,15 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { FaGithub, FaGoogle } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { AuthContext } from '../../../providers/AuthProvider';
+import { updateProfile } from 'firebase/auth';
 
 
 const Register = () => {
-    const {user , createUserEmail} = useContext(AuthContext);
+    const {createUserEmail } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     const handleRegister = (event) => {
         event.preventDefault();
@@ -18,7 +20,7 @@ const Register = () => {
         const email = form.email.value;
         const password = form.password.value;
 
-        if(password.length < 6){
+        if (password.length < 6) {
             toast.error("Password can not be less than 6 character", {
                 position: toast.POSITION.TOP_CENTER,
                 autoClose: 2000,
@@ -27,47 +29,61 @@ const Register = () => {
                 pauseOnHover: false,
                 draggable: true,
                 progress: undefined
-              });
+            });
 
-              return;
+            return;
         }
 
 
 
-        // console.log(name , photo , email , password);
+        // console.log(name, photo, email, password);
 
 
-       createUserEmail(email , password)
-       .then (res => {
-        const loggedUser = res.user;
-        console.log(loggedUser);
-        toast.success("successfully created " , {
-            position:toast.POSITION.TOP_CENTER,
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: false,
-            draggable: true,
-            progress: undefined
- 
-         });
-       })
-       .catch (error => {
-        toast.error(`${error.message}` , {
-            position:toast.POSITION.TOP_CENTER,
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: false,
-            draggable: true,
-            progress: undefined
- 
-         });
-       })
-        
+        createUserEmail(email, password)
+            .then(res => {
+                const loggedUser = res.user;
+                
+                updateProfile(loggedUser, {
+                    displayName: name,
+                    photoURL: photo
+                })
+                console.log(loggedUser);
+
+                toast.success("successfully created ", {
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: false,
+                    draggable: true,
+                    progress: undefined
+
+                });
+
+                setTimeout(() => {
+                    navigate('/');
+                }, 1500);
+
+            })
+            .catch(error => {
+                toast.error(`${error.message}`, {
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: false,
+                    draggable: true,
+                    progress: undefined
+
+                });
+            })
+
+
 
         form.reset();
     }
+
+
 
     return (
         <div className='mt-20'>
@@ -122,7 +138,7 @@ const Register = () => {
                             </div>
 
                         </form>
-                        <ToastContainer/>
+                        <ToastContainer />
                     </div>
                 </div>
 

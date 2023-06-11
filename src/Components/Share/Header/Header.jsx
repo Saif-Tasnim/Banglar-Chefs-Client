@@ -4,7 +4,10 @@ import { AuthContext } from '../../../providers/AuthProvider';
 import { ToastContainer, toast } from 'react-toastify';
 
 const Header = () => {
-    const { user, logOut } = useContext(AuthContext);
+    const { user, logOut, loading } = useContext(AuthContext);
+    // const profileImgUrl = "https://marketplace.canva.com/EAFEits4-uw/1/0/800w/canva-boy-cartoon-gamer-animated-twitch-profile-photo-r0bPCSjUqg0.jpg";
+
+
     console.log(user);
 
     const [toggle, setToggle] = useState(false);
@@ -23,7 +26,7 @@ const Header = () => {
         setTimeout(() => {
             logOut()
                 .then(() => {
-                    history.push('/');
+
                 })
                 .catch(error => {
                     console.log(error);
@@ -31,10 +34,14 @@ const Header = () => {
         }, 1500);
     }
 
+    if (loading) {
+        return <span className="loading loading-dots loading-lg"></span>
+
+    }
 
     return (
         <div className='bg-base-300'>
-            <div className="navbar md:w-3/4 md:mx-auto justify-between">
+            <div className="navbar md:w-3/4 md:mx-auto justify-between pt-7">
                 <div className="navbar-start">
 
                     {/* mobile responsive */}
@@ -54,13 +61,16 @@ const Header = () => {
 
                                 <li>
                                     {user ? <>
-                                        <Link to="/" onClick={handleLogOut}>
-                                            LogOut {user.email}
-                                        </Link>
-                                        <ToastContainer />
+                                        <div className="tooltip" data-tip={user.displayName}>
+                                            <Link to="/" onClick={handleLogOut}>
+                                                <img src={user.photoURL} className='w-11 h-11 rounded-md' alt="" />
+                                            </Link>
+                                            <ToastContainer />
+
+                                        </div>
                                     </> : (
-                                        <Link to="/login" >
-                                            LogIn
+                                        <Link to="/login">
+                                            Log In
                                         </Link>
                                     )}
                                 </li>
@@ -70,22 +80,25 @@ const Header = () => {
 
                     </div>
 
-
+                
                     <Link to='/' className="btn btn-ghost normal-case text-2xl text-orange-700"> Banglar Chefs</Link>
                 </div>
 
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
-                        <li> <Link to="/"> Home </Link> </li>
-                        <li> <Link to='/blog'> Blog </Link></li>
-                        <li>
+                        <li className='mt-2'> <Link to="/"> Home </Link> </li>
+                        <li className='mt-2'> <Link to='/blog'> Blog </Link></li>
+                        <li className='mt-2'>
                             {user ? <>
-                                <Link to="/" onClick={handleLogOut}>
-                                    LogOut {user.email}
-                                </Link>
-                                <ToastContainer />
+                                <div className="tooltip" data-tip={user.displayName}>
+                                    <Link to="/" onClick={handleLogOut}>
+                                        <img src={user.photoURL} className='w-11 h-11 rounded-md' alt="" />
+                                    </Link>
+                                    <ToastContainer />
+
+                                </div>
                             </> : (
-                                <Link to="/login" >
+                                <Link to="/login">
                                     LogIn
                                 </Link>
                             )}
